@@ -25,7 +25,7 @@ export default function DashboardLayout({
             <NavbarNotification />
           </NavbarColumn>
         </Navbar>
-        <main className="mr-6 flex h-full flex-col gap-6 rounded-sm bg-white p-6">
+        <main className="mr-6 flex h-full flex-col gap-6 rounded-sm bg-white p-6 max-h-[850px]">
           <div className="flex w-full justify-between">
             <DashboardBreadcrumb/>
             <Refresh />
