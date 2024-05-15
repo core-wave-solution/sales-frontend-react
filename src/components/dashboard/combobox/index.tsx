@@ -26,9 +26,16 @@ export function Combobox({
   empty,
   items,
   className,
+  value,
+  setValue,
 }: Readonly<ComboboxProps>) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
+  const [val, setVal] = useState(value);
+
+  function handleChangeValue(newValue: string) {
+    setVal(newValue);
+    setValue(newValue);
+  }
 
   return (
     <div className={cn("flex flex-col gap-3 overflow-hidden", className)}>
@@ -43,7 +50,7 @@ export function Combobox({
             aria-expanded={open}
             className="w-full justify-between"
           >
-            {value ? items.find((item) => item.value === value)?.label : label}
+            {val ? items.find((item) => item.value === val)?.label : label}
             <FaChevronUp
               className={cn(
                 "ml-2 h-4 w-4 shrink-0 opacity-50 duration-300",
@@ -62,14 +69,14 @@ export function Combobox({
                   key={item.value}
                   value={item.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
+                    handleChangeValue(currentValue === val ? "" : currentValue);
                     setOpen(false);
                   }}
                 >
                   <FaCheck
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === item.value ? "opacity-100" : "opacity-0",
+                      val === item.value ? "opacity-100" : "opacity-0",
                     )}
                   />
                   {item.label}

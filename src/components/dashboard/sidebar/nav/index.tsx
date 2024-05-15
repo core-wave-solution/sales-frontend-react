@@ -5,5 +5,5 @@ export function SidebarNav({
   children,
   className,
 }: Readonly<SidebarGenericProps>) {
-  return <div className={cn("flex flex-col gap-6", className)}>{children}</div>;
+  return <div className={cn("flex flex-col gap-6 w-full", className)}>{children}</div>;
 }

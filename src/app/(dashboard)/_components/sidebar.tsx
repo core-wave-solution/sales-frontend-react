@@ -38,31 +38,31 @@ export function DashboardSidebar() {
     },
     {
       title: "Produtos",
-      href: "product",
+      href: "/products",
       icon: FaHamburger,
       type: "Main",
     },
     {
       title: "Clientes",
-      href: "client",
+      href: "/clients",
       icon: FaUserFriends,
       type: "Main",
     },
     {
       title: "Minha Empresa",
-      href: "company",
+      href: "/company",
       icon: FaBuilding,
       type: "Main",
     },
     {
       title: "Ajuda",
-      href: "help",
+      href: "/help",
       icon: FaRegQuestionCircle,
       type: "Footer",
     },
     {
       title: "Sair",
-      href: "sign-out",
+      href: "/sign-out",
       icon: FaSignOutAlt,
       type: "Footer",
     },
@@ -153,12 +153,16 @@ function DashboardSidebarBody({
             ))}
         </SidebarNav>
       </SidebarMain>
-      <SidebarFooter className={padding}>
+      <SidebarFooter>
         <SidebarNav>
           {items
             .filter((a) => a.type === "Footer")
             .map((item, index) => (
-              <SidebarNavLink href={item.href} key={index}>
+              <SidebarNavLink
+                href={item.href}
+                key={index}
+                className={cn(padding, "flex h-12 items-center")}
+              >
                 <RenderContent {...item} />
               </SidebarNavLink>
             ))}

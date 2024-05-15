@@ -1,4 +1,4 @@
 export enum ProcessState {
-  START = "start",
-  PROGRESS = "progress",
+	START = "start",
+	PROGRESS = "progress",
 }
