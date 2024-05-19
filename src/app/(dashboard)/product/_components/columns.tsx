@@ -41,13 +41,27 @@ const SortButton = (
 
 export type Product = {
   id: string;
-  searchCode: string;
-  image: string;
-  status: "pending" | "processing" | "success" | "failed";
+  code: string;
+  image_path: string;
   name: string;
+  description: string;
   price: number;
   cost: number;
-  category: string;
+  category: Category;
+  size: Size;
+  is_available: boolean;
+};
+
+export type Category = {
+  id: string;
+  image_path: string;
+  name: string;
+};
+
+export type Size = {
+  id: string;
+  name: string;
+  is_active: boolean;
 };
 
 export const columns: ColumnDef<Product>[] = [
@@ -75,11 +89,11 @@ export const columns: ColumnDef<Product>[] = [
     enableResizing: false,
   },
   {
-    accessorKey: "image",
+    accessorKey: "image_path",
     header: "Imagem",
     cell: ({ row }) => (
       <Image
-        src={`/img/${row.getValue("image")}`}
+        src={`/img/${row.getValue("image_path")}`}
         alt="Product image"
         height={50}
         width={50}
@@ -87,18 +101,42 @@ export const columns: ColumnDef<Product>[] = [
     ),
   },
   {
-    accessorKey: "searchCode",
+    accessorKey: "code",
     header: ({ column }) => SortButton(column, "Código de Busca"),
-    cell: ({ row }) => {
-      const searchCode = parseFloat(row.getValue("searchCode"));
-
-      return <div className="font-medium">{searchCode}</div>;
-    },
+    cell: ({ row }) => <div className="font-medium">{row.getValue("code")}</div>,
+    enableSorting: true,
   },
   {
     accessorKey: "name",
     header: ({ column }) => SortButton(column, "Nome"),
     cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
+    enableSorting: true,
+  },
+  {
+    accessorKey: "category",
+    header: ({ column }) => SortButton(column, "Categoria"),
+    cell: ({ row }) => {
+      const category: Category = row.getValue("category");
+      return <div className="capitalize">{category.name}</div>;
+    },
+    enableSorting: true,
+  },
+  {
+    accessorKey: "size",
+    header: ({ column }) => SortButton(column, "Tamanho"),
+    cell: ({ row }) => {
+      const size: Size = row.getValue("size");
+      return <div className="capitalize">{size.name}</div>;
+    },
+    enableSorting: true,
+  },
+  {
+    accessorKey: "is_available",
+    header: ({ column }) => SortButton(column, "Disponível"),
+    cell: ({ row }) => {
+      const is_available = row.getValue("is_available")? "Sim" : "Não";
+      return <div className="capitalize">{is_available}</div>;
+    },
     enableSorting: true,
   },
   {
@@ -128,27 +166,6 @@ export const columns: ColumnDef<Product>[] = [
 
       return <div className="text-right font-medium">{formatted}</div>;
     },
-  },
-  {
-    accessorKey: "status",
-    header: ({ column }) => SortButton(column, "Status"),
-    cell: ({ row }) => {
-      const status: "pending" | "processing" | "success" | "failed" =
-        row.getValue("status");
-
-      const statusVariant = {
-        pending: "outline",
-        processing: "default",
-        success: "success",
-        failed: "destructive",
-      };
-      return (
-        <Badge className="capitalize" variant={statusVariant[status]}>
-          {status}
-        </Badge>
-      );
-    },
-    enableSorting: true,
   },
   {
     id: "actions",
