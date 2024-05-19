@@ -20,21 +20,33 @@ export function ProcessCard(processType: Readonly<ProcessTypeProps>) {
       title: "Hotdog Especial",
       quantity: 1,
       state: ProcessState.PROGRESS,
-      status: "late",
+      status: "Started",
+      employee_id: "1-1-1-1-1",
+      group_item_id: "1-1-1-1-1",
+      process_rule_id: "1-1-1-1-1",
+      products: [],
     },
     {
       id: "1233435",
       title: "Hotdog Especial",
       quantity: 2,
       state: ProcessState.PROGRESS,
-      status: "inTime",
+      status: "Started",
+      employee_id: "1-1-1-1-1",
+      group_item_id: "1-1-1-1-1",
+      process_rule_id: "1-1-1-1-1",
+      products: [],
     },
     {
       id: "12354566",
       title: "Hotdog Especial",
       quantity: 1,
       state: ProcessState.PROGRESS,
-      status: "inTime",
+      status: "Started",
+      employee_id: "1-1-1-1-1",
+      group_item_id: "1-1-1-1-1",
+      process_rule_id: "1-1-1-1-1",
+      products: [],
     },
   ];
 
@@ -62,7 +74,7 @@ export function ProcessCard(processType: Readonly<ProcessTypeProps>) {
 
       <CardFooter className="mt-auto flex flex-row items-center justify-between gap-3">
         <Badge variant="destructive">
-          {processes.filter((process) => process.status === "late").length} em
+          {processes.filter((process) => process.status === "Started").length} em
           atraso
         </Badge>
         <Button variant="link">Ver Mais</Button>
